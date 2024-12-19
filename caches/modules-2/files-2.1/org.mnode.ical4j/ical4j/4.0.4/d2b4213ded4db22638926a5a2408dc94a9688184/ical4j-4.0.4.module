@@ -1,0 +1,418 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.mnode.ical4j",
+    "module": "ical4j",
+    "version": "4.0.4",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.slf4j",
+          "module": "slf4j-api",
+          "version": {
+            "requires": "2.0.12"
+          }
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.17.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.threeten",
+          "module": "threeten-extra",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.slf4j",
+          "module": "slf4j-api",
+          "version": {
+            "requires": "2.0.12"
+          }
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.17.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.threeten",
+          "module": "threeten-extra",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4-javadoc.jar",
+          "url": "ical4j-4.0.4-javadoc.jar",
+          "size": 2932374,
+          "sha512": "97e53e76a589d4a5e22781447b9bcc9ddda4892807e9bcbcd49f6ef151bbb45939c272a8aca1f6555378115208ec061a27a49b0aafa601fab7cd24bc68d5b1d5",
+          "sha256": "66c3fd0dd2d533145d173c2446286baa796d0c3ee25f18bd374511d84eca21e4",
+          "sha1": "8372f3350833812a26924883f991f2c3be4bd060",
+          "md5": "f0b03723aba462215b11d33d3ad7eaee"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4-sources.jar",
+          "url": "ical4j-4.0.4-sources.jar",
+          "size": 2167649,
+          "sha512": "f0bfb89cc8677dd5eccd529a51264437c162a8f21ec724dcf448c33a8b470476b1f93ae6d97d3b0f265b773dffcf0d04a9e9df1c60cc6e9ac98d223aa4678591",
+          "sha256": "4f508d1d4d445d54a386b65d4169401e85816acd57314a66bbb8d4874717a3d6",
+          "sha1": "ca3a18e1fc49a664bc85d7857abcad8d4cfce764",
+          "md5": "d09529fe029deaba96e20bf1ebac5208"
+        }
+      ]
+    },
+    {
+      "name": "jcacheTimezoneCacheApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-jcache-timezone-cache",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "jcacheTimezoneCacheRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "javax.cache",
+          "module": "cache-api",
+          "version": {
+            "requires": "1.1.1"
+          }
+        },
+        {
+          "group": "org.jetbrains",
+          "module": "annotations",
+          "version": {
+            "requires": "23.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-jcache-timezone-cache",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "filterExpressionsApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-filter-expressions",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "filterExpressionsRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jparsec",
+          "module": "jparsec",
+          "version": {
+            "requires": "3.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-filter-expressions",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "groovyDslApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-groovy-dsl",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "groovyDslRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.codehaus.groovy",
+          "module": "groovy",
+          "version": {
+            "requires": "3.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-groovy-dsl",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "schemaValidationApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-schema-validation",
+          "version": "4.0.4"
+        }
+      ]
+    },
+    {
+      "name": "schemaValidationRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ical4j-4.0.4.jar",
+          "url": "ical4j-4.0.4.jar",
+          "size": 2281940,
+          "sha512": "07316d5c0c7cca372d19778b244b86c43cfed7989cff2653342f6f6680e313bd17b7bcf08aa04f3526e41642ca2a87ef8c1cd8c3c81bf03f71e9457cd9ffdab7",
+          "sha256": "e6ba4763cad5616af9071b942d270edd8ba2e8ab2c95b8c7ff1153a5a71f8cb8",
+          "sha1": "65a8a4b194b3de4f8a14245326a7be0dbe16e365",
+          "md5": "53ab377c7b1f16fb3d473543f2d49db6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.mnode.ical4j",
+          "name": "ical4j-schema-validation",
+          "version": "4.0.4"
+        }
+      ]
+    }
+  ]
+}

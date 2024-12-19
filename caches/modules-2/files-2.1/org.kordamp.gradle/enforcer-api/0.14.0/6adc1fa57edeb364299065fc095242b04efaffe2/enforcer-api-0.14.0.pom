@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.kordamp.gradle</groupId>
+  <artifactId>enforcer-api</artifactId>
+  <version>0.14.0</version>
+  <name>enforcer-gradle-plugin</name>
+  <description>Enforcer rules API</description>
+  <url>https://github.com/kordamp/enforcer-gradle-plugin</url>
+  <inceptionYear>2020</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache-2.0</name>
+      <url>https://spdx.org/licenses/Apache-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>aalmiray</id>
+      <name>Andres Almiray</name>
+      <url>https://andresalmiray.com/</url>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <properties>
+        <twitter>aalmiray</twitter>
+        <github>aalmiray</github>
+      </properties>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/kordamp/enforcer-gradle-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:kordamp/enforcer-gradle-plugin.git</developerConnection>
+    <url>https://github.com/kordamp/enforcer-gradle-plugin</url>
+  </scm>
+  <properties/>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.15.0</version>
+    </dependency>
+  </dependencies>
+</project>

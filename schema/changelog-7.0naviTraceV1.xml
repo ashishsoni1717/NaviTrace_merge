@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+        logicalFilePath="changelog-7.0naviTraceV1">
+
+    <changeSet author="author" id="changelog-7.0naviTraceV1">
+
+        <createTable tableName="tc_alarmtypes">
+            <column name="id"
+                    type="INT"
+                    autoIncrement="true">
+            <constraints primaryKey="true" />
+            </column>
+            <column name="nid" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="type" type="VARCHAR(64)">
+            <constraints nullable="false" />
+            </column>
+       </createTable>
+
+        <createTable tableName="tc_audittrails">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="createdon"
+                    type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP" />
+            <column name="userid" type="INT" />
+            <column name="username" type="VARCHAR(128)" />
+            <column name="component" type="VARCHAR(128)" />
+            <column name="activity" type="VARCHAR(128)" />
+            <column name="statuscode" type="VARCHAR(128)" />
+            <column name="platform" type="VARCHAR(128)" />
+            <column name="description" type="VARCHAR(500)" />
+            <column name="ipaddress" type="VARCHAR(50)" />
+        </createTable>
+
+        <createTable tableName="tc_deviceextnds">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="deviceid" type="INT" />
+              <column name="seatingcap" type="INT" />
+              <column name="model" type="VARCHAR(256)" />
+              <column name="servicetype" type="VARCHAR(256)" />
+              <column name="permitno" type="VARCHAR(256)" />
+              <column name="permitvalidfrom" type="TIMESTAMP" />
+              <column name="permitvalidto" type="TIMESTAMP" />
+              <column name="permitfrom" type="VARCHAR(256)" />
+              <column name="permitto" type="VARCHAR(256)" />
+              <column name="period" type="INT" />
+              <column name="attributes" type="VARCHAR(4000)" />
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tc_deviceextnds"
+            baseColumnNames="deviceid"
+            constraintName="fk_deviceextnd_deviceid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_devices" />
+
+        <createTable tableName="tc_bustimetables">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="deviceextendid" type="INT" />
+              <column name="stationfromid" type="INT" />
+              <column name="stationtoid" type="INT" />
+              <column name="departuretime" type="VARCHAR(256)" />
+              <column name="arrivaltime" type="VARCHAR(256)" />
+              <column name="trip" type="INT" />
+              <column name="via" type="VARCHAR(1024)" />
+              <column name="address" type="VARCHAR(1024)" />
+              <column name="distance" type="DOUBLE" />
+              <column name="attributes" type="VARCHAR(4000)" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_bustimetables"
+            baseColumnNames="deviceextendid"
+            constraintName="fk_bustimetable_deviceextendid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_deviceextnds" />
+        <addForeignKeyConstraint baseTableName="tc_bustimetables"
+            baseColumnNames="stationfromid"
+            constraintName="fk_bustimetable_stationfromid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_geofences" />
+        <addForeignKeyConstraint baseTableName="tc_bustimetables"
+            baseColumnNames="stationtoid"
+            constraintName="fk_bustimetable_stationtoid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_geofences" />
+
+        <createTable tableName="tc_bussearchhistorys">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="userid" type="INT" />
+              <column name="locations" type="VARCHAR(512)" />
+              <column name="searchon" type="TIMESTAMP" />
+              <column name="createdon" type="TIMESTAMP" />
+              <column name="time" type="VARCHAR(256)" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_bussearchhistorys"
+            baseColumnNames="userid"
+            constraintName="fk_bussearchhistory_userid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_users" />
+
+        <createTable tableName="tc_devicelogs">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="deviceid" type="INT" />
+              <column name="hexcode" type="VARCHAR(4000)" />
+              <column name="content" type="VARCHAR(512)" />
+              <column name="createdOn" type="TIMESTAMP" />
+              <column name="ip" type="VARCHAR(32)" />
+              <column name="fixtime" type="TIMESTAMP" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_devicelogs"
+            baseColumnNames="deviceid"
+            constraintName="fk_device_deviceid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_devices" />
+
+        <createTable tableName="tc_oems">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(128)">
+                <constraints nullable="false" />
+              </column>
+              <column name="contact" type="VARCHAR(16)">
+                <constraints nullable="false" />
+              </column>
+              <column name="address" type="VARCHAR(256)" />
+              <column name="empanelledon" type="TIMESTAMP" />
+              <column name="empanelledupto" type="TIMESTAMP" />
+        </createTable>
+        <createTable tableName="tc_oemmakemodels">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="oemid" type="INT">
+                <constraints nullable="false" />
+              </column>
+              <column name="make" type="VARCHAR(128)">
+                <constraints nullable="false" />
+              </column>
+              <column name="model" type="VARCHAR(128)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_user_oemmakemodel">
+          <column name="userid" type="INT">
+            <constraints nullable="false" />
+          </column>
+          <column name="oemmakemodelid" type="INT">
+            <constraints nullable="false" />
+          </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="tc_oems" columnNames="name" constraintName="uk_tc_oems_name" />
+        <addUniqueConstraint tableName="tc_oems" columnNames="contact" constraintName="uk_tc_oems_contact" />
+        <addForeignKeyConstraint baseTableName="tc_oemmakemodels"
+            baseColumnNames="oemid"
+            constraintName="fk_oemmakemodel_oemid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_oems" />
+        <addForeignKeyConstraint baseTableName="tc_user_oemmakemodel"
+            baseColumnNames="userid"
+            constraintName="fk_user_oemmakemodel_userid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_users" />
+        <addForeignKeyConstraint baseTableName="tc_user_oemmakemodel"
+            baseColumnNames="oemmakemodelid"
+            constraintName="fk_user_oemmakemodel_oemmakemodelid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_oemmakemodels" />
+
+        <createTable tableName="tc_password_history">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="userid" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="hashedpassword" type="VARCHAR(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="createdon" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </createTable>
+
+        <createIndex tableName="tc_password_history" indexName="idx_tc_password_history_user_id">
+            <column name="userid" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="tc_password_history"
+                                 baseColumnNames="userid"
+                                 constraintName="fk_password_history_users_id_id"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tc_users" />
+
+
+    <createTable tableName="tc_routes">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints primaryKey="true" />
+      </column>
+      <column name="name" type="VARCHAR(128)" />
+      <column name="estimateddistance" type="FLOAT" />
+      <column name="estdduration" type="INT" />
+      <column name="createdon" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+      <column name="lastupdate" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+      <column name="stoptype" type="VARCHAR(128)" />
+      <column name="routetype" type="VARCHAR(128)" />
+      <column name="description" type="VARCHAR(512)" />
+      <column name="createdby" type="INT"  />
+      <column name="modifiedby" type="INT"  />
+    </createTable>
+
+    <createTable tableName="tc_legs">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints primaryKey="true" />
+      </column>
+      <column name="routeid" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="routeindex" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="latitudefrom" type="DOUBLE" />
+      <column name="longitudefrom" type="DOUBLE" />
+      <column name="radiusfrom" type="DOUBLE" />
+      <column name="latitudeto" type="DOUBLE" />
+      <column name="longitudeto" type="DOUBLE" />
+      <column name="radiusto" type="DOUBLE" />
+      <column name="namefrom" type="VARCHAR(128)" />
+      <column name="nameto" type="VARCHAR(128)" />
+      <column name="estddurnfromorigin" type="INT" />
+      <column name="estdistancefromorigin" type="FLOAT" />
+      <column name="polyline" type="CLOB" />
+    </createTable>
+
+    <addForeignKeyConstraint baseTableName="tc_legs"
+                             baseColumnNames="routeid"
+                             constraintName="fk_legs_routeid"
+                             referencedTableName="tc_routes"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE" />
+
+    <createTable tableName="tc_trips">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints primaryKey="true" />
+      </column>
+      <column name="deviceid" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="routeid" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="legid" type="INT" />
+      <column name="status" type="VARCHAR(128)" />
+      <column name="assignedtime" type="TIMESTAMP" />
+      <column name="starttime" type="TIMESTAMP" />
+      <column name="endtime" type="TIMESTAMP" />
+      <column name="tripdelayed" type="BOOLEAN" />
+      <column name="deviated" type="BOOLEAN" />
+      <column name="initialodometer" type="Double" />
+      <column name="closingodometer" type="Double" />
+      <column name="assignedby" type="INT" />
+      <column name="modifiedby" type="INT" />
+      <column name="remarks" type="VARCHAR(512)" />
+      <column name="closingtype" type="VARCHAR(128)" />
+      <column name="triplegs" type="VARCHAR(4000)" />
+    </createTable>
+
+    <addForeignKeyConstraint baseTableName="tc_trips"
+                             baseColumnNames="deviceid"
+                             constraintName="fk_trips_deviceid"
+                             referencedTableName="tc_devices"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE" />
+
+    <addForeignKeyConstraint baseTableName="tc_trips"
+                             baseColumnNames="routeid"
+                             constraintName="fk_trips_routeid"
+                             referencedTableName="tc_routes"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE" />
+
+    <addForeignKeyConstraint baseTableName="tc_routes"
+                             baseColumnNames="createdby"
+                             constraintName="fk_route_createdby"
+                             referencedTableName="tc_users"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE" />
+
+    <addForeignKeyConstraint baseTableName="tc_routes"
+                             baseColumnNames="modifiedby"
+                             constraintName="fk_route_modifiedby"
+                             referencedTableName="tc_users"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE" />
+
+    <addForeignKeyConstraint baseTableName="tc_trips"
+                                 baseColumnNames="assignedby"
+                                 constraintName="fk_trip_assignedby"
+                                 referencedTableName="tc_users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE" />
+
+
+        <createTable tableName="tc_states">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_rtos">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+              <column name="code" type="VARCHAR(16)">
+                <constraints nullable="false" />
+              </column>
+              <column name="stateid" type="INT">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_vcategorys">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tc_rtos"
+            baseColumnNames="stateid"
+            constraintName="fk_rto_stateid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_states" />
+
+        <createTable tableName="tc_simproviders">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+
+
+        <createTable tableName="tc_sosalarms">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="type" type="VARCHAR(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="eventtime" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="deviceid" type="INT" />
+            <column name="positionid" type="INT" />
+            <column name="geofenceid" type="INT" />
+            <column name="latitude" type="DOUBLE" />
+            <column name="longitude" type="DOUBLE" />
+            <column name="attributes" type="VARCHAR(4000)" />
+            <column name="maintenanceid" type="INT" />
+            <column name="action" type="VARCHAR(100)" />
+            <column name="remark" type="VARCHAR(500)" />
+            <column name="status" type="VARCHAR(32)"  />
+            <column name="location" type="VARCHAR(256)"  />
+            <column name="updateon" type="TIMESTAMP" />
+            <column name="permitholder" type="VARCHAR(100)" />
+            <column name="permitholderphone" type="VARCHAR(16)" />
+        </createTable>
+       <addForeignKeyConstraint baseTableName="tc_sosalarms"
+                                baseColumnNames="deviceid"
+                                constraintName="fk_sosalarms_deviceid"
+                                onDelete="CASCADE"
+                                referencedColumnNames="id"
+                                referencedTableName="tc_devices" />
+
+
+        <createTable tableName="tc_sossummarys">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="deviceid" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="tcmonth" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="year" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="total" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="VARCHAR(32)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_sossummarys"
+                                baseColumnNames="deviceid"
+                                constraintName="fk_sossummarys_deviceid"
+                                onDelete="CASCADE"
+                                referencedColumnNames="id"
+                                referencedTableName="tc_devices" />
+
+        <createTable tableName="tc_tokens">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="userid" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="usertoken" type="VARCHAR(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="islogin" type="BOOLEAN" />
+            <column name="isthirdparty" type="BOOLEAN" />
+            <column name="createdon" type="TIMESTAMP" />
+            <column name="disabled" type="BOOLEAN" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_tokens"
+                                 baseColumnNames="userid"
+                                 constraintName="fk_token_userid"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tc_users" />
+
+        <createTable tableName="tc_uiconfigs">
+          <column name="id" type="INT" autoIncrement="true">
+            <constraints primaryKey="true" />
+          </column>
+
+          <column name="uikey" type="VARCHAR(64)">
+            <constraints nullable="false" />
+          </column>
+
+          <column name="configurations"
+                type="VARCHAR(4000)">
+            <constraints nullable="false" />
+          </column>
+          <column name="createdon"
+                  type="TIMESTAMP"
+                  defaultValueComputed="CURRENT_TIMESTAMP" >
+          </column>
+          <column name="lastupdate"
+                  type="TIMESTAMP" >
+          </column>
+        </createTable>
+        <addUniqueConstraint tableName="tc_uiconfigs" columnNames="uikey" constraintName="uk_tc_uiconfigs_uikey" />
+
+        <createTable tableName="tc_userroles">
+         <column name="id"
+                 type="INT"
+                 autoIncrement="true">
+           <constraints primaryKey="true" />
+         </column>
+         <column name="rolename" type="VARCHAR(50)" defaultValue="null" />
+         <column name="roles"
+                 type="VARCHAR(4000)">
+           <constraints nullable="false" />
+         </column>
+         <column name="createdon" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+         <column name="lastupdate" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </createTable>
+
+       <createTable tableName="tc_user_userrole">
+           <column name="userid" type="INT">
+               <constraints nullable="false" />
+           </column>
+           <column name="userroleid" type="INT">
+               <constraints nullable="false" />
+           </column>
+      </createTable>
+      <addColumn tableName="tc_users">
+          <column name="roleid" type="INT" />
+      </addColumn>
+      <addForeignKeyConstraint baseTableName="tc_users"
+                              baseColumnNames="roleid"
+                              constraintName="fk_users_roleid"
+                              referencedTableName="tc_userroles"
+                              referencedColumnNames="id"
+                              onDelete="CASCADE" />
+      <addForeignKeyConstraint baseTableName="tc_user_userrole"
+                              baseColumnNames="userid"
+                              constraintName="fk_user_userrole_userid"
+                              onDelete="CASCADE"
+                              referencedColumnNames="id"
+                              referencedTableName="tc_users" />
+      <addForeignKeyConstraint baseTableName="tc_user_userrole"
+                               baseColumnNames="userroleid"
+                               constraintName="fk_user_userrole_userroleid"
+                               onDelete="CASCADE"
+                               referencedColumnNames="id"
+                               referencedTableName="tc_userroles" />
+
+        <createTable tableName="tc_vmakes">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_vmodels">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="vmakeid" type="INT" />
+              <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_vmodels"
+            baseColumnNames="vmakeid"
+            constraintName="fk_vmake_vmodleid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_vmakes" />
+
+       <createTable tableName="tc_m2mwhitelistings">
+         <column name="id"
+                 type="INT"
+                 autoIncrement="true">
+           <constraints primaryKey="true" />
+         </column>
+         <column name="m2mip" type="VARCHAR(128)">
+           <constraints nullable="false" />
+         </column>
+          <column name="disabled" type="BOOLEAN" />
+       </createTable>
+
+       <createTable tableName="tc_notificationtypes">
+         <column name="id"
+                 type="INT"
+                 autoIncrement="true">
+           <constraints primaryKey="true" />
+         </column>
+         <column name="nid" type="INT">
+             <constraints nullable="false" />
+         </column>
+         <column name="type" type="VARCHAR(64)">
+           <constraints nullable="false" />
+         </column>
+       </createTable>
+
+       <createTable tableName="tc_oemcops">
+         <column name="id"
+                 type="INT"
+                 autoIncrement="true">
+           <constraints primaryKey="true" />
+         </column>
+        <column name="oemid" type="INT">
+            <constraints nullable="false" />
+        </column>
+         <column name="copno" type="VARCHAR(128)">
+            <constraints nullable="false" />
+         </column>
+       </createTable>
+       <addForeignKeyConstraint baseTableName="tc_oemcops"
+                                baseColumnNames="oemid"
+                                constraintName="fk_user_oem_oemid"
+                                onDelete="CASCADE"
+                                referencedColumnNames="id"
+                                referencedTableName="tc_oems"/>
+
+       <createTable tableName="tc_eventnotificationlogs">
+        <column name="id" type="INT" autoIncrement="true">
+          <constraints primaryKey="true" />
+        </column>
+        <column name="userid" type="INT">
+          <constraints nullable="false" />
+        </column>
+        <column name="deviceid" type="INT">
+                <constraints nullable="false" />
+        </column>
+        <column name="alerttype" type="VARCHAR(64)" />
+        <column name="eventtime" type="TIMESTAMP" />
+        <column name="positionid" type="INT">
+          <constraints nullable="true" />
+        </column>
+        <column name="latitude" type="DOUBLE" />
+        <column name="longitude" type="DOUBLE" />
+        <column name="altitude" type="DOUBLE" />
+        <column name="start_time" type="TIMESTAMP" />
+        <column name="start_lat" type="DOUBLE" />
+        <column name="start_lng" type="DOUBLE" />
+        <column name="status" type="VARCHAR(64)" />
+        <column name="notificator_type" type="VARCHAR(32)" />
+        <column name="attributes" type="VARCHAR(4000)" />
+      </createTable>
+       <addForeignKeyConstraint baseTableName="tc_eventnotificationlogs"
+                                baseColumnNames="deviceid"
+                                constraintName="fk_tc_eventnotificationlog_deviceid"
+                                onDelete="CASCADE"
+                                referencedColumnNames="id"
+                                referencedTableName="tc_devices"/>
+
+        <createTable tableName="tc_permitviolations">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="violations" type="VARCHAR(256)">
+                <constraints nullable="false" />
+              </column>
+              <column name="penalty" type="FLOAT">
+                <constraints nullable="false" />
+              </column>
+              <column name="createdby" type="INT" >
+                 <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_reportedviolations">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="vehiclenumber" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+              <column name="violationid" type="INT">
+                <constraints nullable="false" />
+              </column>
+              <column name="remark" type="VARCHAR(256)" />
+              <column name="status" type="VARCHAR(128)" />
+              <column name="image" type="VARCHAR(512)" />
+              <column name="reportedby" type="INT" >
+                 <constraints nullable="false" />
+              </column>
+        </createTable>
+        <createTable tableName="tc_generatedpermitviolations">
+              <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+              </column>
+              <column name="vehiclenumber" type="VARCHAR(32)">
+                <constraints nullable="false" />
+              </column>
+              <column name="violationids" type="VARCHAR(1024)">
+                <constraints nullable="false" />
+              </column>
+              <column name="remark" type="VARCHAR(256)" />
+              <column name="status" type="VARCHAR(128)" />
+              <column name="image" type="VARCHAR(512)"  />
+              <column name="totalpenalty" type="FLOAT">
+                <constraints nullable="false" />
+              </column>
+              <column name="reportedby" type="INT" >
+                 <constraints nullable="false" />
+              </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_permitviolations"
+                                         baseColumnNames="createdby"
+                                         constraintName="fk_permitviolation_createdby"
+                                         onDelete="CASCADE"
+                                         referencedColumnNames="id"
+                                         referencedTableName="tc_users" />
+        <addForeignKeyConstraint baseTableName="tc_reportedviolations"
+                                         baseColumnNames="violationid"
+                                         constraintName="fk_reportedviolation_violationid"
+                                         onDelete="CASCADE"
+                                         referencedColumnNames="id"
+                                         referencedTableName="tc_permitviolations" />
+        <addForeignKeyConstraint baseTableName="tc_reportedviolations"
+                                         baseColumnNames="reportedby"
+                                         constraintName="fk_reportedviolation_reportedby"
+                                         onDelete="CASCADE"
+                                         referencedColumnNames="id"
+                                         referencedTableName="tc_users" />
+        <addForeignKeyConstraint baseTableName="tc_generatedpermitviolations"
+                                         baseColumnNames="reportedby"
+                                         constraintName="fk_generatedpermitviolation_reportedby"
+                                         onDelete="CASCADE"
+                                         referencedColumnNames="id"
+                                         referencedTableName="tc_users" />
+
+        <createTable tableName="tc_user_reportedviolation">
+          <column name="userid" type="INT">
+            <constraints nullable="false" />
+          </column>
+          <column name="reportedviolationid" type="INT">
+            <constraints nullable="false" />
+          </column>
+        </createTable>
+        <createTable tableName="tc_user_generatedpermitviolation">
+          <column name="userid" type="INT">
+            <constraints nullable="false" />
+          </column>
+          <column name="generatedpermitviolationid" type="INT">
+            <constraints nullable="false" />
+          </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_user_reportedviolation"
+            baseColumnNames="userid"
+            constraintName="fk_user_reportedviolation_userid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_users" />
+        <addForeignKeyConstraint baseTableName="tc_user_reportedviolation"
+            baseColumnNames="reportedviolationid"
+            constraintName="fk_user_reportedviolation_reportedviolationid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_reportedviolations" />
+        <addForeignKeyConstraint baseTableName="tc_user_generatedpermitviolation"
+            baseColumnNames="userid"
+            constraintName="fk_user_generatedpermitviolation_userid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_users" />
+        <addForeignKeyConstraint baseTableName="tc_user_generatedpermitviolation"
+            baseColumnNames="generatedpermitviolationid"
+            constraintName="fk_user_generatedpermitviolation_generatedpermitviolationid"
+            onDelete="CASCADE"
+            referencedColumnNames="id"
+            referencedTableName="tc_generatedpermitviolations" />
+
+    <createTable tableName="tc_user_oem">
+      <column name="userid" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="oemid" type="INT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <addForeignKeyConstraint baseTableName="tc_user_oem"
+                             baseColumnNames="oemid"
+                             constraintName="fk_user_oem1_oemid"
+                             onDelete="CASCADE"
+                             referencedColumnNames="id"
+                             referencedTableName="tc_oems" />
+    <addForeignKeyConstraint baseTableName="tc_user_oem"
+                             baseColumnNames="userid"
+                             constraintName="fk_user_oem_userid"
+                             onDelete="CASCADE"
+                             referencedColumnNames="id"
+                             referencedTableName="tc_users" />
+
+
+    <createTable tableName="tc_user_route">
+      <column name="userid" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="routeid" type="INT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+
+    <addForeignKeyConstraint baseTableName="tc_user_route"
+        baseColumnNames="userid"
+        constraintName="fk_user_route_userid"
+        onDelete="CASCADE"
+        referencedColumnNames="id"
+        referencedTableName="tc_users" />
+
+    <addForeignKeyConstraint baseTableName="tc_user_route"
+        baseColumnNames="routeid"
+        constraintName="fk_user_route_routeid"
+        onDelete="CASCADE"
+        referencedColumnNames="id"
+        referencedTableName="tc_routes" />
+
+	  </changeSet>
+</databaseChangeLog>

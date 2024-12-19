@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+        logicalFilePath="changelog-7.1">
+
+    <changeSet author="author" id="changelog-7.1">
+
+<!--        tc_sosalarms table created-->
+
+        <createTable tableName="tc_sosalarms">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="type" type="VARCHAR(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="eventtime" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="deviceid" type="INT" />
+            <column name="positionid" type="INT" />
+            <column name="geofenceid" type="INT" />
+            <column name="latitude" type="DOUBLE" />
+            <column name="longitude" type="DOUBLE" />
+            <column name="attributes" type="VARCHAR(4000)" />
+            <column name="maintenanceid" type="INT" />
+            <column name="action" type="VARCHAR(100)" />
+            <column name="remark" type="VARCHAR(500)" />
+            <column name="status" type="VARCHAR(32)"  />
+            <column name="location" type="VARCHAR(256)"  />
+            <column name="updateon" type="TIMESTAMP" />
+            <column name="permitholder" type="VARCHAR(100)" />
+            <column name="permitholderphone" type="VARCHAR(16)" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_sosalarms"
+                                 baseColumnNames="deviceid"
+                                 constraintName="fk_sosalarms_deviceid"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tc_devices" />
+
+        <!--        tc_sossummarys table created-->
+
+        <createTable tableName="tc_sossummarys">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="deviceid" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="tcmonth" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="year" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="total" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="VARCHAR(32)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tc_sossummarys"
+                                 baseColumnNames="deviceid"
+                                 constraintName="fk_sossummarys_deviceid"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tc_devices" />
+
+    </changeSet>
+
+</databaseChangeLog>
